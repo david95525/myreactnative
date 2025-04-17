@@ -1,10 +1,18 @@
 import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
 
+interface Datatype {
+  blob: {
+    ICON: string[];
+    Text: string[];
+    merged_numbers: string[];
+  };
+}
 const Scan: React.FC = () => {
   const [hasPermission, setHasPermission] = useState(false);
+  const [sys, setSys] = useState('');
   const cameraRef = useRef<Camera>(null);
   const device = useCameraDevice('back');
   const isFocused = useIsFocused();
@@ -39,25 +47,30 @@ const Scan: React.FC = () => {
     const data = new FormData();
     data.append('file', {
       uri: 'file://' + path,
-      name: 'auto_photo.jpg',
       type: 'image/jpeg',
     });
-    Alert.alert('Uploaded!');
-    // try {
-    //   const res = await fetch('https://your-api.com/upload', {
-    //     method: 'POST',
-    //     body: data,
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //   });
+    try {
+      let res = await fetch(
+        'https://yolo-638049934068.us-central1.run.app/upload',
+        {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
 
-    //   if (res.ok) {
-    //     Alert.alert('Uploaded!');
-    //   }
-    // } catch (e) {
-    //   console.warn('Upload failed', e);
-    // }
+      if (res.ok) {
+        let values: Datatype = await res.json();
+        setSys(values.blob.merged_numbers[0]);
+      }
+      let result = await res.json();
+      Alert.alert(result);
+    } catch (e) {
+      console.warn('Upload failed', e);
+      Alert.alert('Upload failed' + e);
+    }
   };
 
   if (device == null || !hasPermission) {
@@ -74,6 +87,10 @@ const Scan: React.FC = () => {
         photo={true}
       />
       <View style={styles.scanBox} />
+      <View>
+        <Text>SYS</Text>
+        <Text>{sys}</Text>
+      </View>
     </View>
   );
 };

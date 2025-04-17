@@ -1,30 +1,35 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import TabBar from './src/components/tabbar';
+import Sidebar from './src/components/Sidebar';
+import DataPage from './src/pages/dataPage';
+import HealthDashboard from './src/pages/healthDashboard';
 import Home from './src/pages/home';
-import ProfileScreen from './src/pages/profilescreen';
 import Scan from './src/pages/scan';
-const Tab = createBottomTabNavigator();
+
+const Drawer = createDrawerNavigator();
+
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        tabBar={props => <TabBar {...props} />}
-        screenOptions={{tabBarActiveTintColor: 'red'}}>
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Icon name="home" size={size} color={color} />
-            ),
-          }}
+      <Drawer.Navigator
+        drawerContent={props => <Sidebar {...props} />}
+        screenOptions={{
+          headerShown: false,
+          drawerType: 'permanent', // 固定不收起
+          drawerStyle: {
+            width: 200, // sidebar 寬度，可自訂
+            backgroundColor: '#0052CC',
+          },
+        }}>
+        <Drawer.Screen
+          name="HealthDashboard"
+          component={HealthDashboard}
         />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Scan" component={Scan} />
-      </Tab.Navigator>
+        <Drawer.Screen name="Data" component={DataPage} />
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Scan" component={Scan} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

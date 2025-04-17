@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Text,
-  View
+  View,
 } from 'react-native';
-function ProfileScreen() {
+function DataPage() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Profile Screen</Text>
+      <Text>Data Page</Text>
     </View>
   );
 }
-export default ProfileScreen;
+export default DataPage;
