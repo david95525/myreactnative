@@ -1,17 +1,29 @@
-// HealthDashboard.tsx
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
+import PainLevelSelector from '../components/painlevelselector';
 
-export default function HealthDashboard() {
+const HealthDashboard = () => {
+  const {width, height} = useWindowDimensions();
+  const isLandscape = width > height;
+
   const [data, setData] = useState({
     name: 'Bianca Beasley',
     age: '83',
     gender: 'MALE',
-    heightFeet: '6',
-    heightInches: '1',
+    heightFt: '6',
+    heightIn: '1',
     weight: '157.9',
-    temperature: '',
+    temperature: '98.6',
     bpSystolic: '130',
     bpDiastolic: '84',
     pulse: '88',
@@ -19,143 +31,231 @@ export default function HealthDashboard() {
     pulse2: '86',
     respiratoryRate: '',
     glucose: '',
-    painLevel: '8',
+    painLevel: 8,
   });
 
-  const handleChange = (key: keyof typeof data, value: string) => {
-    setData({ ...data, [key]: value });
+  const handleChange = (key: string, value: string | number) => {
+    setData(prev => ({...prev, [key]: value}));
   };
 
   const saveData = async () => {
     try {
-      await AsyncStorage.setItem('@healthData', JSON.stringify(data));
-      alert('Saved!');
+      await AsyncStorage.setItem('healthData', JSON.stringify(data));
+      Alert.alert('Saved!');
     } catch (e) {
-      alert('Failed to save.');
+      console.error('Save failed', e);
     }
   };
 
   const loadData = async () => {
     try {
-      const saved = await AsyncStorage.getItem('@healthData');
-      if (saved) {setData(JSON.parse(saved));}
-      else {alert('No saved data.');}
+      const stored = await AsyncStorage.getItem('healthData');
+      if (stored) {
+        setData(JSON.parse(stored));
+      } else {
+        Alert.alert('No saved data.');
+      }
     } catch (e) {
-      alert('Failed to load.');
+      console.error('Load failed', e);
     }
   };
 
-  const InfoCard = ({ label, value, unit, onChange }: { label: string; value: string; unit?: string; onChange: (val: string) => void }) => (
-    <View style={styles.card}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.valueInput} value={value} onChangeText={onChange} keyboardType="numeric" />
-      {unit && <Text style={styles.unit}>{unit}</Text>}
-    </View>
-  );
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Resident Header */}
-      <View style={styles.headerCard}>
-        <View style={styles.avatar} />
-        <View style={{ flex: 1 }}>
+      <View style={styles.cardHeader}>
+        <View style={styles.basic}>
           <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.info}>Age: {data.age}</Text>
-          <Text style={styles.info}>{data.gender}</Text>
+          <Text style={styles.info}>
+            Age: {data.age} | {data.gender}
+          </Text>
         </View>
-        <View style={{ alignItems: 'flex-end' }}>
-          <Text style={styles.subInfo}>Height</Text>
-          <Text>{data.heightFeet} ft {data.heightInches} in</Text>
-          <Text style={styles.subInfo}>Weight</Text>
-          <Text>{data.weight} lb</Text>
+        <View style={styles.height}>
+          <Text style={styles.label}>Height</Text>
+          <TextInput
+            value={data.heightFt}
+            keyboardType="numeric"
+            style={styles.inlineInput}
+            onChangeText={v => handleChange('heightFt', v)}
+          />
+          <Text>ft</Text>
+          <TextInput
+            value={data.heightIn}
+            keyboardType="numeric"
+            style={styles.inlineInput}
+            onChangeText={v => handleChange('heightIn', v)}
+          />
+          <Text>inch</Text>
+        </View>
+        <View style={styles.weight}>
+          <Text style={styles.label}>Weight</Text>
+          <TextInput
+            value={data.weight}
+            keyboardType="numeric"
+            style={styles.inlineInput}
+            onChangeText={v => handleChange('weight', v)}
+          />
+          <Text>lb</Text>
         </View>
       </View>
-
-      {/* Card Sections */}
-      <View style={styles.row}>
-        <InfoCard label="Body Temperature" value={data.temperature} unit="°F" onChange={(v) => handleChange('temperature', v)} />
-        <InfoCard label="Blood Pressure" value={`${data.bpSystolic} / ${data.bpDiastolic}`} unit="mmHg" onChange={() => {}} />
-        <InfoCard label="Pulse" value={data.pulse} unit="bpm" onChange={(v) => handleChange('pulse', v)} />
+      <View style={[styles.cardGrid, isLandscape && styles.cardGridLandscape]}>
+        <View style={styles.card}>
+          <Text>Body Temperature</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.temperature}
+            onChangeText={v => handleChange('temperature', v)}
+            keyboardType="numeric"
+          />{' '}
+          <Text>°F</Text>
+        </View>
+        <View style={styles.bpmcard}>
+          <View>
+            <Text>Blood Pressure</Text>
+            <TextInput
+              style={styles.valueInput}
+              value={data.bpSystolic}
+              onChangeText={v => handleChange('bpSystolic', v)}
+              keyboardType="numeric"
+            />
+            <Text>/</Text>
+            <TextInput
+              style={styles.valueInput}
+              value={data.bpDiastolic}
+              onChangeText={v => handleChange('bpDiastolic', v)}
+              keyboardType="numeric"
+            />
+          </View>
+          <Text>mmHg</Text>
+          <Text>Pulse</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.pulse}
+            onChangeText={v => handleChange('pulse', v)}
+            keyboardType="numeric"
+          />
+          <Text>bpm</Text>
+        </View>
+        <View style={styles.card}>
+          <Text>SpO2</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.spo2}
+            onChangeText={v => handleChange('spo2', v)}
+            keyboardType="numeric"
+          />
+          <Text>%</Text>
+          <Text>Pulse</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.pulse2}
+            onChangeText={v => handleChange('pulse2', v)}
+            keyboardType="numeric"
+          />
+          <Text>bpm</Text>
+        </View>
+        <View style={styles.card}>
+          <Text>Resiratory Rate</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.respiratoryRate}
+            onChangeText={v => handleChange('respiratoryRate', v)}
+            keyboardType="numeric"
+          />
+          <Text>Breaths/min</Text>
+        </View>
+        <View style={styles.card}>
+          <Text>Blood Glucose</Text>
+          <TextInput
+            style={styles.valueInput}
+            value={data.glucose}
+            onChangeText={v => handleChange('glucose', v)}
+            keyboardType="numeric"
+          />
+          <Text>mg/dL</Text>
+        </View>
       </View>
-
-      <View style={styles.row}>
-        <InfoCard label="SpO2" value={data.spo2} unit="%" onChange={(v) => handleChange('spo2', v)} />
-        <InfoCard label="Pulse" value={data.pulse2} unit="bpm" onChange={(v) => handleChange('pulse2', v)} />
-        <InfoCard label="Respiratory Rate" value={data.respiratoryRate} unit="Breaths/min" onChange={(v) => handleChange('respiratoryRate', v)} />
-        <InfoCard label="Blood Glucose" value={data.glucose} unit="mg/dL" onChange={(v) => handleChange('glucose', v)} />
-      </View>
-
-      {/* Pain Level */}
-      <View style={styles.card}>
-        <Text style={styles.label}>Pain Level</Text>
-        <TextInput
-          style={styles.valueInput}
-          value={data.painLevel}
-          onChangeText={(v) => handleChange('painLevel', v)}
-          keyboardType="numeric"
-        />
-      </View>
-
-      {/* Buttons */}
-      <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.button} onPress={saveData}>
-          <Text style={styles.buttonText}>Save</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: 16,
+        }}>
+        <View style={{flex: 1}}>
+          <PainLevelSelector value={data.painLevel} onChange={handleChange} />
+        </View>
+        <TouchableOpacity style={styles.saveButton} onPress={saveData}>
+          <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#888' }]} onPress={loadData}>
-          <Text style={styles.buttonText}>Load</Text>
+        <TouchableOpacity style={styles.saveButton} onPress={loadData}>
+          <Text style={styles.saveText}>Load</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { padding: 10 },
-  headerCard: {
-    backgroundColor: '#dceeff',
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 10,
+  container: {padding: 10},
+  cardHeader: {
     flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: '#e3f2fd',
+    padding: 10,
   },
-  avatar: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#aaa',
-    borderRadius: 30,
-    marginRight: 15,
+  name: {fontSize: 20, fontWeight: 'bold'},
+  info: {fontSize: 14, color: '#333'},
+  basic: {flexDirection: 'column', width: '70%'},
+  height: {flexDirection: 'column', flexWrap: 'wrap', width: '10%'},
+  weight: {flexDirection: 'column', flexWrap: 'wrap'},
+  label: {fontWeight: 'bold', marginTop: 4},
+  inlineInput: {
+    borderBottomWidth: 1,
+    minWidth: 30,
+    textAlign: 'center',
+    marginHorizontal: 2,
   },
-  name: { fontSize: 18, fontWeight: 'bold' },
-  info: { fontSize: 14, color: '#333' },
-  subInfo: { fontSize: 12, color: '#666' },
+  cardGrid: {flexDirection: 'column', flexWrap: 'wrap'},
+  cardGridLandscape: {flexDirection: 'row'},
   card: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 12,
+    padding: 10,
     margin: 5,
-    flex: 1,
-    alignItems: 'center',
-    elevation: 2,
+    borderRadius: 12,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.5,
+    width: '30%',
   },
-  label: { fontSize: 14, color: '#555' },
+  bpmcard: {
+    backgroundColor: '#fff',
+    padding: 10,
+    margin: 5,
+    borderRadius: 12,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.5,
+    width: '65%',
+  },
   valueInput: {
     fontSize: 20,
     fontWeight: 'bold',
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    minWidth: 60,
     textAlign: 'center',
+    borderBottomWidth: 1,
+    marginVertical: 5,
   },
-  unit: { fontSize: 12, color: '#999', marginTop: 4 },
-  row: { flexDirection: 'row', justifyContent: 'space-between' },
-  buttonRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 20 },
-  button: {
-    backgroundColor: '#0066cc',
-    paddingVertical: 10,
+
+  saveButton: {
+    backgroundColor: '#0033A0',
+    paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 8,
-    marginHorizontal: 10,
+    borderRadius: 12,
+    marginLeft: 16,
   },
-  buttonText: { color: '#fff', fontWeight: 'bold' },
+  saveText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
+
+export default HealthDashboard;
