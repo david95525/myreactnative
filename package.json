@@ -8,7 +8,16 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "build": "cd android && ./gradlew assembleRelease"
+    "build": "cd android && ./gradlew assembleRelease",
+    "codegen": "cd android && ./gradlew generateCodegenArtifactsFromSchema"
+  },
+  "codegenConfig": {
+    "name": "NativeLocalStorageSpec",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.nativelocalstorage"
+    }
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
@@ -19,6 +28,7 @@
     "@types/react-native-vector-icons": "^6.4.18",
     "react": "19.0.0",
     "react-native": "^0.79.1",
+    "react-native-app-auth": "^8.0.2",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-paper": "^5.13.1",
     "react-native-permissions": "^5.3.0",

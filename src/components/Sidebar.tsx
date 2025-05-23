@@ -32,6 +32,11 @@ const Sidebar = ({navigation}: DrawerContentComponentProps) => {
           label="Scan"
           onPress={() => navigation.navigate('Scan')}
         />
+          <MenuItem
+          icon="login"
+          label="OAuth2Auth"
+          onPress={() => navigation.navigate('OAuth2Auth')}
+        />
       </View>
     </View>
   );

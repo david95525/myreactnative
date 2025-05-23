@@ -5,6 +5,7 @@ import Sidebar from './src/components/Sidebar';
 import DataPage from './src/pages/dataPage';
 import HealthDashboard from './src/pages/healthDashboard';
 import Home from './src/pages/home';
+import OAuth2Login from './src/pages/oauth2page';
 import Scan from './src/pages/scan';
 
 const Drawer = createDrawerNavigator();
@@ -22,13 +23,11 @@ function App(): React.JSX.Element {
             backgroundColor: '#0052CC',
           },
         }}>
-        <Drawer.Screen
-          name="HealthDashboard"
-          component={HealthDashboard}
-        />
+        <Drawer.Screen name="HealthDashboard" component={HealthDashboard} />
         <Drawer.Screen name="Data" component={DataPage} />
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Scan" component={Scan} />
+        <Drawer.Screen name="OAuth2Auth" component={OAuth2Login} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
