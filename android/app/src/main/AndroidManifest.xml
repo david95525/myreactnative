@@ -30,7 +30,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
 
-        <data android:scheme="myapp" android:host="oauth2redirect" />
+        <data android:scheme="myreactnative" android:host="oauth2redirect" />
       </intent-filter>
     </activity>
   </application>

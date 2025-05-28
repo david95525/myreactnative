@@ -7551,6 +7551,7 @@ __metadata:
     react-native: "npm:^0.79.1"
     react-native-app-auth: "npm:^8.0.2"
     react-native-gesture-handler: "npm:^2.25.0"
+    react-native-keychain: "npm:^10.0.0"
     react-native-paper: "npm:^5.13.1"
     react-native-permissions: "npm:^5.3.0"
     react-native-picker-select: "npm:^9.3.1"
@@ -8335,6 +8336,13 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/b7a37437f439b1e27a4d980de01994aa71b9091dc3ed00c21172d5505fb11978cd5ed3a43f97c89d502a3a08cf26e5cea6435b8d6e93d3557a92dd43563f7021
+  languageName: node
+  linkType: hard
+
+"react-native-keychain@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "react-native-keychain@npm:10.0.0"
+  checksum: 10c0/a632ad27e58264506d2b373d329a867f042fb014e8a78db3a63031e953d61b5c98066eed1be238ee6c186d3f213d0efaa2a26526fb3a1d36a624c4460e982230
   languageName: node
   linkType: hard
 
