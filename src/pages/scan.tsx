@@ -51,7 +51,7 @@ const Scan: React.FC = () => {
     });
     try {
       let res = await fetch(
-        'https://yolo-638049934068.us-central1.run.app/upload',
+        '',
         {
           method: 'POST',
           body: data,

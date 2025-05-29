@@ -21,19 +21,19 @@ export class TokenManager {
         }
     }
 
-    async clearToken(): Promise<void> {
-        await Keychain.resetGenericPassword();
+    async clearToken(): Promise<boolean> {
+        return await Keychain.resetGenericPassword();
     }
 
-    isTokenExpired(token: TokenData): boolean {
-        return new Date(token.accessTokenExpirationDate) <= new Date();
+    isTokenExpired(accessTokenExpirationDate: string): boolean {
+        return new Date(accessTokenExpirationDate) <= new Date();
     }
 
     async refreshTokenIfNeeded(): Promise<TokenData | null> {
         const current = await this.loadToken();
         if (!current || !current.refreshToken) {return null;}
 
-        if (!this.isTokenExpired(current)) {
+        if (!this.isTokenExpired(current.accessTokenExpirationDate)) {
             return current;
         }
         const refreshed = await refresh(this.config, {

@@ -13,29 +13,24 @@ const Sidebar = ({navigation}: DrawerContentComponentProps) => {
 
       <View style={styles.menu}>
         <MenuItem
-          icon="speedometer"
-          label="HealthDashboard"
-          onPress={() => navigation.navigate('HealthDashboard')}
-        />
-        <MenuItem
-          icon="format-list-bulleted"
-          label="Data"
-          onPress={() => navigation.navigate('Data')}
-        />
-        <MenuItem
           icon="cog"
           label="Home"
           onPress={() => navigation.navigate('Home')}
         />
         <MenuItem
-          icon="information-outline"
-          label="Scan"
-          onPress={() => navigation.navigate('Scan')}
-        />
-        <MenuItem
           icon="login"
           label="OAuth2Login"
           onPress={() => navigation.navigate('OAuth2Login')}
+        />
+        <MenuItem
+          icon="speedometer"
+          label="HealthDashboard"
+          onPress={() => navigation.navigate('HealthDashboard')}
+        />
+        <MenuItem
+          icon="information-outline"
+          label="Scan"
+          onPress={() => navigation.navigate('Scan')}
         />
       </View>
     </View>

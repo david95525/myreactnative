@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {AuthService} from '../services/authService';
-interface MemberData {
-  name: string;
-  email: string;
-}
+import {MemberService} from '../services/memberService';
+import {MemberData} from '../types/member';
 const OAuth2Login = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenExpiry, setAccessTokenExpiry] = useState<string | null>(
@@ -16,34 +14,52 @@ const OAuth2Login = () => {
   const [memberData, setMemberData] = useState<MemberData | null>(null);
   useEffect(() => {
     const loadTokens = async () => {
-      setLoading(true);
-      let auth = await AuthService.getValidToken(setError);
-      if (auth) {
-        setAccessToken(auth.accessToken);
-        setAccessTokenExpiry(auth.accessTokenExpirationDate);
+      const token = await AuthService.getValidToken(setError);
+      if (token) {
+        setAccessToken(token.accessToken);
+        setAccessTokenExpiry(token.accessTokenExpirationDate);
+        loadMemberData();
       }
-      setLoading(false);
     };
+    setLoading(true);
     loadTokens();
+    setLoading(false);
   }, []);
-  const handleLogin = async () => {
-    setError(null);
-    let token = await AuthService.login(setError);
+  const loadTokens = async () => {
+    const token = await AuthService.getValidToken(setError);
     if (token) {
       setAccessToken(token.accessToken);
       setAccessTokenExpiry(token.accessTokenExpirationDate);
-      let member_result = await AuthService.getBaseMemberData(
-        token.accessToken,
-        setError,
-      );
-      if (member_result && member_result.data) {
-        setMemberData(member_result.data);
-      }
+      loadMemberData();
+    }
+  };
+
+  const loadMemberData = async () => {
+    setError(null);
+    const member = await MemberService.getBaseMemberData(setError);
+    if (member) {
+      setMemberData(member);
+    } else {
+      setState('Could not get a valid token.');
+    }
+  };
+  const handleLogin = async () => {
+    setError(null);
+    const token = await AuthService.login(setError);
+    if (token) {
+      setAccessToken(token.accessToken);
+      setAccessTokenExpiry(token.accessTokenExpirationDate);
+      loadMemberData();
     }
   };
   const handleLogout = async () => {
     setLoading(true);
-    await AuthService.logout();
+    const islogout = await AuthService.logout();
+    if (islogout) {
+      setAccessToken(null);
+      setAccessTokenExpiry(null);
+      setMemberData(null);
+    }
     setLoading(false);
     setError(null);
   };
@@ -52,19 +68,10 @@ const OAuth2Login = () => {
       <Text style={styles.title}>OAuth2 Authentication Example</Text>
       {loading && <Text>Loading...</Text>}
       {!loading && accessToken ? (
-        accessTokenExpiry && AuthService.isAccessTokenExpired() ? (
+        accessTokenExpiry &&
+        AuthService.isAccessTokenExpired(accessTokenExpiry) ? (
           <View>
-            <Button
-              title="Refresh Token"
-              onPress={async () => {
-                let token = await AuthService.getValidToken(setError);
-                if (token) {
-                  setAccessToken(token.accessToken);
-                  setAccessTokenExpiry(token.accessTokenExpirationDate);
-                }
-              }}
-              disabled={loading}
-            />
+            <Button title="Refresh Token" onPress={loadTokens} disabled={loading} />
             <Text>
               Access token expired. Attempting refresh or need re-login.
             </Text>
@@ -74,18 +81,7 @@ const OAuth2Login = () => {
             <Button title="Logout" onPress={handleLogout} disabled={loading} />
             <Button
               title="Get MemberData"
-              onPress={async () => {
-                setError(null);
-                let result = await AuthService.getBaseMemberData(
-                  accessToken,
-                  setError,
-                );
-                if (result && result.data) {
-                  setMemberData(result.data);
-                } else {
-                  setState('Could not get a valid token.');
-                }
-              }}
+              onPress={loadMemberData}
               disabled={loading}
             />
             {memberData && (
