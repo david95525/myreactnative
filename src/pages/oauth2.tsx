@@ -1,9 +1,19 @@
+import {DrawerScreenProps} from '@react-navigation/drawer';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Linking, StyleSheet, Text, View} from 'react-native';
+import {RootDrawerParamList, WebViewStackParamList} from '../../App';
 import {AuthService} from '../services/authService';
 import {MemberService} from '../services/memberService';
 import {MemberData} from '../types/member';
-const OAuth2Login = () => {
+type OAuth2ScreenProps = CompositeScreenProps<
+  DrawerScreenProps<RootDrawerParamList, 'OAuth2Login'>,
+  StackScreenProps<WebViewStackParamList>
+>;
+const url =
+  'https://phrdev.microlifecloud.com/scanbp?redirect_uri=myreactnative://oauth2redirect';
+const OAuth2Login = ({navigation}: OAuth2ScreenProps) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenExpiry, setAccessTokenExpiry] = useState<string | null>(
     null,
@@ -63,6 +73,15 @@ const OAuth2Login = () => {
     setLoading(false);
     setError(null);
   };
+  const openURL = () => {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log('無法開啟 ' + url);
+      }
+    });
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>OAuth2 Authentication Example</Text>
@@ -70,8 +89,12 @@ const OAuth2Login = () => {
       {!loading && accessToken ? (
         accessTokenExpiry &&
         AuthService.isAccessTokenExpired(accessTokenExpiry) ? (
-          <View>
-            <Button title="Refresh Token" onPress={loadTokens} disabled={loading} />
+          <View style={styles.content}>
+            <Button
+              title="Refresh Token"
+              onPress={loadTokens}
+              disabled={loading}
+            />
             <Text>
               Access token expired. Attempting refresh or need re-login.
             </Text>
@@ -95,11 +118,13 @@ const OAuth2Login = () => {
           </View>
         )
       ) : (
-        <Button
-          title="Login with OAuth2"
-          onPress={handleLogin}
-          disabled={loading}
-        />
+        <View style={styles.content}>
+          <Button
+            title="Login with OAuth2"
+            onPress={handleLogin}
+            disabled={loading}
+          />
+        </View>
       )}
       {accessToken && <Text>Access Token: {accessToken}</Text>}
       {accessTokenExpiry && (
@@ -107,6 +132,24 @@ const OAuth2Login = () => {
       )}
       {error && <Text style={styles.error}>Error: {error}</Text>}
       {state && <Text>State: {state}</Text>}
+      <View style={styles.content}>
+        <Button
+          title="open with browser"
+          onPress={openURL}
+          disabled={loading}
+        />
+      </View>
+      <View style={styles.content}>
+        <Button
+          title="open with webview"
+          onPress={() =>
+            navigation.navigate('WebViewStack', {
+              screen: 'WebViewMain',
+              params: {uri: url},
+            })
+          }
+        />
+      </View>
     </View>
   );
 };
@@ -122,7 +165,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   error: {color: 'red', marginBottom: 10},
-  content: {alignItems: 'center'},
+  content: {flex: 1, alignItems: 'center'},
   label: {
     fontSize: 16,
     fontWeight: 'bold',

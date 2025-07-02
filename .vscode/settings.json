@@ -1,3 +1,19 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.printWidth": 160,
+  "prettier.trailingComma": "none",
+  "prettier.bracketSameLine": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.addMissingImports": "explicit"
+  },
+  "java.compile.nullAnalysis.mode": "automatic"
 }
