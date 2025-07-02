@@ -8,18 +8,23 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-
+const Colors = {
+  light: {
+    background: '#FFFFFF',
+    text: '#1C1C1E',
+    tint: '#0A84FF',
+    border: '#C7C7CC',
+  },
+  dark: {
+    background: '#000000',
+    text: '#FFFFFF',
+    tint: '#0A84FF',
+    border: '#3A3A3C',
+  },
+};
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -28,7 +33,9 @@ function Section({children, title}: SectionProps): React.JSX.Element {
         style={[
           styles.sectionTitle,
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: isDarkMode
+              ? Colors.dark.background
+              : Colors.light.background,
           },
         ]}>
         {title}
@@ -37,7 +44,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
         style={[
           styles.sectionDescription,
           {
-            color: isDarkMode ? Colors.light : Colors.dark,
+            color: isDarkMode ? Colors.dark.text : Colors.light.text,
           },
         ]}>
         {children}
@@ -50,7 +57,9 @@ function Home(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode
+      ? Colors.dark.background
+      : Colors.light.background,
   };
 
   const safePadding = '5%';
@@ -61,12 +70,11 @@ function Home(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <ScrollView style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header />
-        </View>
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor: isDarkMode
+              ? Colors.dark.background
+              : Colors.light.background,
             paddingHorizontal: safePadding,
             paddingBottom: safePadding,
           }}>
@@ -74,16 +82,9 @@ function Home(): React.JSX.Element {
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
           <Section title="Learn More">
             <Text> Read the docs to discover what to do next:</Text>
           </Section>
-          <LearnMoreLinks />
         </View>
       </ScrollView>
     </View>
