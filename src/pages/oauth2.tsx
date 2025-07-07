@@ -9,11 +9,12 @@ import {MemberService} from '../services/memberService';
 import {MemberData} from '../types/member';
 type OAuth2ScreenProps = CompositeScreenProps<
   DrawerScreenProps<RootDrawerParamList, 'OAuth2Login'>,
-  StackScreenProps<WebViewStackParamList>
+  StackScreenProps<WebViewStackParamList, 'WebViewMain'>
 >;
 const url =
   'https://phrdev.microlifecloud.com/scanbp?redirect_uri=myreactnative://oauth2redirect';
-const OAuth2Login = ({navigation}: OAuth2ScreenProps) => {
+const OAuth2Login = ({navigation, route}: OAuth2ScreenProps) => {
+  const {sys, dia, pul} = route.params ?? {};
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenExpiry, setAccessTokenExpiry] = useState<string | null>(
     null,
@@ -149,6 +150,9 @@ const OAuth2Login = ({navigation}: OAuth2ScreenProps) => {
             })
           }
         />
+        <Text>sys:{sys}</Text>
+        <Text>dia:{dia}</Text>
+        <Text>pul:{pul}</Text>
       </View>
     </View>
   );

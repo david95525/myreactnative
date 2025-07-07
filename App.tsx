@@ -14,16 +14,16 @@ import Home from './src/pages/home';
 import OAuth2Login from './src/pages/oauth2';
 import Scan from './src/pages/scan';
 import WebViewScreen from './src/pages/webview';
-// 定義 WebView 堆疊的參數型別
+
+export type OAuth2Params = Record<string, string>;
 export type WebViewStackParamList = {
   WebViewMain: {uri: string}; // WebView 堆疊中的主畫面
 };
-// 定義抽屜導航器的參數型別
 export type RootDrawerParamList = {
   HealthDashboard: undefined;
   Home: undefined;
   Scan: undefined;
-  OAuth2Login: undefined;
+  OAuth2Login: OAuth2Params | undefined;
   WebViewStack: NavigatorScreenParams<WebViewStackParamList>;
 };
 const Drawer = createDrawerNavigator<RootDrawerParamList>();

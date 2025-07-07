@@ -1,6 +1,5 @@
 // WebViewScreen.tsx
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import type {NavigatorScreenParams} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useRef, useState} from 'react';
 import {
@@ -20,23 +19,10 @@ type WebViewScreenProps = StackScreenProps<
   WebViewStackParamList,
   'WebViewMain'
 >;
-type DrawerRouteWithoutParams = {
-  [K in keyof RootDrawerParamList]: undefined extends RootDrawerParamList[K]
-    ? K
-    : never;
-}[keyof RootDrawerParamList];
-const deepLinkToRouteMap: Record<string, keyof RootDrawerParamList> = {
-  health: 'HealthDashboard',
-  home: 'Home',
-  scan: 'Scan',
-  oauth2redirect: 'OAuth2Login',
-  webview: 'WebViewStack',
-};
 function WebViewScreen({route, navigation}: WebViewScreenProps) {
   const [sys, setSys] = useState('');
   const [dia, setDia] = useState('');
   const [pul, setPul] = useState('');
-  const [Req, setreq] = useState('');
   const [cameraReady, setCameraReady] = useState(false);
   const {uri} = route.params;
   React.useEffect(() => {
@@ -86,31 +72,24 @@ function WebViewScreen({route, navigation}: WebViewScreenProps) {
       );
     }
   };
+  const toQueryObj = (url: URL): Record<string, string> =>
+    Object.fromEntries(url.searchParams) as Record<string, string>;
   const handleShouldStart: OnShouldStartLoadWithRequest = req => {
-    if (req.url.startsWith('https://phrdev.microlifecloud.com/redirect')) {
-      try {
-        const routeName = deepLinkToRouteMap.oauth2redirect;
-        const parentNav =
-          navigation.getParent<DrawerNavigationProp<RootDrawerParamList>>();
-        if (!parentNav) {
-          return false;
-        }
-        setreq(`${routeName as DrawerRouteWithoutParams}`);
-        if (routeName === 'WebViewStack') {
-          parentNav.navigate('WebViewStack', {
-            screen: 'WebViewMain',
-            params: {uri: '.'},
-          } satisfies NavigatorScreenParams<WebViewStackParamList>);
-        } else {
-          parentNav.navigate(routeName as DrawerRouteWithoutParams);
-        }
-        return false;
-      } catch (err) {
-        console.error('URL 解析錯誤:', err);
-        return false;
-      }
+    if (!req.url.startsWith('https://phrdev.microlifecloud.com/redirect')) {
+      return true;
     }
-    return true;
+    try {
+      const url = new URL(req.url);
+      const parentNav =
+        navigation.getParent<DrawerNavigationProp<RootDrawerParamList>>();
+      if (!parentNav) return false;
+      const params = toQueryObj(url);
+      parentNav.navigate('OAuth2Login', params);
+      return false;
+    } catch (err) {
+      console.error('URL 解析錯誤:', err);
+      return false;
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -118,7 +97,6 @@ function WebViewScreen({route, navigation}: WebViewScreenProps) {
       <Text>sys:{sys}</Text>
       <Text>dia:{dia}</Text>
       <Text>pul:{pul}</Text>
-      <Text>{Req}</Text>
       {!cameraReady ? (
         <Text>準備相機中…</Text>
       ) : (
