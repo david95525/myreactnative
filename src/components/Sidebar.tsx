@@ -32,6 +32,11 @@ const Sidebar = ({navigation}: DrawerContentComponentProps) => {
           label="Scan"
           onPress={() => navigation.navigate('Scan')}
         />
+        <MenuItem
+          icon="chart-areaspline"
+          label="ChartsDisplay"
+          onPress={() => navigation.navigate('ChartsDisplay')}
+        />
       </View>
     </View>
   );

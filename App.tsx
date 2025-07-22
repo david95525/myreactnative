@@ -8,7 +8,8 @@ import {
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import Sidebar from './src/components/Sidebar';
+import Sidebar from './src/components/Sidebar.tsx';
+import ChartsDisplay from './src/pages/ChartsDisplay';
 import HealthDashboard from './src/pages/healthDashboard';
 import Home from './src/pages/home';
 import OAuth2Login from './src/pages/oauth2';
@@ -24,6 +25,7 @@ export type RootDrawerParamList = {
   Home: undefined;
   Scan: undefined;
   OAuth2Login: OAuth2Params | undefined;
+  ChartsDisplay: undefined;
   WebViewStack: NavigatorScreenParams<WebViewStackParamList>;
 };
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -63,6 +65,7 @@ function CustomDrawerNavigator() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Scan" component={Scan} />
       <Drawer.Screen name="OAuth2Login" component={OAuth2Login} />
+      <Drawer.Screen name="ChartsDisplay" component={ChartsDisplay} />
       <Drawer.Screen
         name="WebViewStack"
         component={WebViewStackScreen}
