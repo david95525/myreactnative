@@ -71,7 +71,13 @@ def enableProguardInReleaseBuilds = false
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
-
+project.ext.react = [
+    enableHermes: true,
+    enableNewArchitecture: true,
+    codegenExcludes: [
+        "**/react-native-ble-plx/**" // 排除不支援 TurboModule 的 lib
+    ]
+]
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -106,15 +112,18 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
-        release {
-               release {
+        release {            
                 signingConfig signingConfigs.release
-                 shrinkResources true
-                  minifyEnabled true
-                   proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-             }
+                shrinkResources true
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"             
         }
     }
+    // externalNativeBuild {
+    //      cmake {
+    //         version "3.22.1"
+    //     }
+    // }
 }
 
 dependencies {

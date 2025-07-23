@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import PainLevelSelector from '../components/painlevelselector';
 
-const HealthDashboard = () => {
+export const HealthDashboard = () => {
   const {width, height} = useWindowDimensions();
   const isLandscape = width > height;
 
@@ -257,5 +257,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default HealthDashboard;

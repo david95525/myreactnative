@@ -10,7 +10,7 @@ interface Datatype {
     merged_numbers: string[];
   };
 }
-const Scan: React.FC = () => {
+export const ScanPage: React.FC = () => {
   const [hasPermission, setHasPermission] = useState(false);
   const [sys, setSys] = useState('');
   const cameraRef = useRef<Camera>(null);
@@ -50,16 +50,13 @@ const Scan: React.FC = () => {
       type: 'image/jpeg',
     });
     try {
-      let res = await fetch(
-        '',
-        {
-          method: 'POST',
-          body: data,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      let res = await fetch('', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
+      });
 
       if (res.ok) {
         let values: Datatype = await res.json();
@@ -94,8 +91,6 @@ const Scan: React.FC = () => {
     </View>
   );
 };
-
-export default Scan;
 
 const styles = StyleSheet.create({
   container: {

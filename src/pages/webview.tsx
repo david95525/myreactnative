@@ -19,7 +19,7 @@ type WebViewScreenProps = StackScreenProps<
   WebViewStackParamList,
   'WebViewMain'
 >;
-function WebViewScreen({route, navigation}: WebViewScreenProps) {
+export function WebViewScreen({route, navigation}: WebViewScreenProps) {
   const [sys, setSys] = useState('');
   const [dia, setDia] = useState('');
   const [pul, setPul] = useState('');
@@ -130,5 +130,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default WebViewScreen;

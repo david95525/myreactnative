@@ -3,7 +3,7 @@ import {View} from 'react-native';
 //import {ChartKit} from '../components/ChartKit';
 import {ChartVictoryNative} from '../components/ChartVictoryNative';
 
-const ChartsDisplay: React.FC = () => {
+export const ChartsDisplay = () => {
   return (
     <View>
       {/* <ChartKit /> */}
@@ -11,5 +11,3 @@ const ChartsDisplay: React.FC = () => {
     </View>
   );
 };
-
-export default ChartsDisplay;

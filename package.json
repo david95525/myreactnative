@@ -11,14 +11,6 @@
     "build": "cd android && ./gradlew assembleRelease",
     "codegen": "cd android && ./gradlew generateCodegenArtifactsFromSchema"
   },
-  "codegenConfig": {
-    "name": "NativeLocalStorageSpec",
-    "type": "modules",
-    "jsSrcsDir": "specs",
-    "android": {
-      "javaPackageName": "com.nativelocalstorage"
-    }
-  },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-picker/picker": "^2.11.1",
@@ -32,6 +24,7 @@
     "react": "19.1.0",
     "react-native": "^0.80.1",
     "react-native-app-auth": "^8.0.3",
+    "react-native-ble-plx": "^3.5.0",
     "react-native-chart-kit": "^6.12.0",
     "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "^2.27.1",

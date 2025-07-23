@@ -53,7 +53,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-function Home(): React.JSX.Element {
+export function Home() {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -109,5 +109,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default Home;

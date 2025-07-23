@@ -13,7 +13,8 @@ type OAuth2ScreenProps = CompositeScreenProps<
 >;
 const url =
   'https://phrdev.microlifecloud.com/scanbp?redirect_uri=myreactnative://oauth2redirect';
-const OAuth2Login = ({navigation, route}: OAuth2ScreenProps) => {
+
+export const OAuth2Login = ({navigation, route}: OAuth2ScreenProps) => {
   const {sys, dia, pul} = route.params ?? {};
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenExpiry, setAccessTokenExpiry] = useState<string | null>(
@@ -181,4 +182,3 @@ const styles = StyleSheet.create({
     color: '#000',
   },
 });
-export default OAuth2Login;

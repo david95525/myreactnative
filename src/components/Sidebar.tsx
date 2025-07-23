@@ -10,38 +10,21 @@ const Sidebar = ({navigation}: DrawerContentComponentProps) => {
         microlife{'\n'}
         <Text style={styles.subLogo}>MultiCare System</Text>
       </Text>
-
       <View style={styles.menu}>
-        <MenuItem
-          icon="cog"
-          label="Home"
-          onPress={() => navigation.navigate('Home')}
-        />
-        <MenuItem
-          icon="login"
-          label="OAuth2Login"
-          onPress={() => navigation.navigate('OAuth2Login')}
-        />
         <MenuItem
           icon="speedometer"
           label="HealthDashboard"
           onPress={() => navigation.navigate('HealthDashboard')}
         />
         <MenuItem
-          icon="information-outline"
-          label="Scan"
-          onPress={() => navigation.navigate('Scan')}
-        />
-        <MenuItem
-          icon="chart-areaspline"
-          label="ChartsDisplay"
-          onPress={() => navigation.navigate('ChartsDisplay')}
+          icon="login"
+          label="OAuth2Login"
+          onPress={() => navigation.navigate('OAuth2Login')}
         />
       </View>
     </View>
   );
 };
-
 const MenuItem = ({icon, onPress}: any) => (
   <TouchableOpacity style={styles.menuItem} onPress={onPress}>
     <Icon name={icon} size={28} color="#fff" />
