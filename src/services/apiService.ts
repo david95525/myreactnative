@@ -1,4 +1,4 @@
-import {config} from '../config/authConfig';
+import {config} from '../constants/authConfig';
 import {AuthService} from './authService';
 
 export const ApiService = {

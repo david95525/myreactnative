@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {HomeStackNavigator} from './Stack';
+import {CustomDrawerNavigator} from './Drawer';
 export function Navigation() {
   const linking = {
     prefixes: ['myreactnative://'],
@@ -14,7 +14,7 @@ export function Navigation() {
   };
   return (
     <NavigationContainer linking={linking}>
-      <HomeStackNavigator />
+      <CustomDrawerNavigator />
     </NavigationContainer>
   );
 }

@@ -12,6 +12,11 @@ const Sidebar = ({navigation}: DrawerContentComponentProps) => {
       </Text>
       <View style={styles.menu}>
         <MenuItem
+          icon="home"
+          label="TabNavigator"
+          onPress={() => navigation.navigate('TabNavigator')}
+        />
+        <MenuItem
           icon="speedometer"
           label="HealthDashboard"
           onPress={() => navigation.navigate('HealthDashboard')}

@@ -3,7 +3,6 @@ import {
   createDrawerNavigator,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import {NavigatorScreenParams} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {
@@ -11,28 +10,10 @@ import {
   OAuth2Login,
   WebViewScreen,
 } from '../../pages/index.tsx';
-export type OAuth2Params = Record<string, string>;
-export type WebViewStackParamList = {
-  WebViewMain: {uri: string}; // WebView 堆疊中的主畫面
-};
-export type RootDrawerParamList = {
-  HealthDashboard: undefined;
-  OAuth2Login: OAuth2Params | undefined;
-  WebViewStack: NavigatorScreenParams<WebViewStackParamList>;
-};
+import {RootDrawerParamList, WebViewStackParamList} from '../../types/index.ts';
+import {CustomBottomTabNavigator} from './BottomTabs.tsx';
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 const WebViewStack = createStackNavigator<WebViewStackParamList>();
-function WebViewStackScreen() {
-  return (
-    <WebViewStack.Navigator initialRouteName="WebViewMain">
-      <WebViewStack.Screen
-        name="WebViewMain"
-        component={WebViewScreen}
-        options={{headerShown: false}}
-      />
-    </WebViewStack.Navigator>
-  );
-}
 export function CustomDrawerNavigator() {
   const rendersidebar = (props: DrawerContentComponentProps) => {
     return <Sidebar {...props} />;
@@ -40,6 +21,7 @@ export function CustomDrawerNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={rendersidebar}
+      initialRouteName="TabNavigator"
       screenOptions={({route}) => {
         const isHealthDashboard = route.name === 'HealthDashboard';
         return {
@@ -51,6 +33,7 @@ export function CustomDrawerNavigator() {
           },
         };
       }}>
+      <Drawer.Screen name="TabNavigator" component={CustomBottomTabNavigator} />
       <Drawer.Screen name="HealthDashboard" component={HealthDashboard} />
       <Drawer.Screen name="OAuth2Login" component={OAuth2Login} />
       <Drawer.Screen
@@ -59,5 +42,16 @@ export function CustomDrawerNavigator() {
         options={{title: 'WebView'}}
       />
     </Drawer.Navigator>
+  );
+}
+function WebViewStackScreen() {
+  return (
+    <WebViewStack.Navigator initialRouteName="WebViewMain">
+      <WebViewStack.Screen
+        name="WebViewMain"
+        component={WebViewScreen}
+        options={{headerShown: false}}
+      />
+    </WebViewStack.Navigator>
   );
 }

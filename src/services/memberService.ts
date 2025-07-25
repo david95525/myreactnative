@@ -1,4 +1,4 @@
-import {api_url} from '../config/authConfig';
+import {api_url} from '../constants/authConfig';
 import {MemberData} from '../types/member';
 import {ApiService} from './apiService';
 export const MemberService = {

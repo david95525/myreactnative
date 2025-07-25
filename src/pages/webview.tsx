@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {WebView, WebViewMessageEvent} from 'react-native-webview';
 import type {OnShouldStartLoadWithRequest} from 'react-native-webview/lib/WebViewTypes';
-import {RootDrawerParamList, WebViewStackParamList} from '../../App';
+import {RootDrawerParamList, WebViewStackParamList} from '../types/index.ts';
 type WebViewScreenProps = StackScreenProps<
   WebViewStackParamList,
   'WebViewMain'

@@ -1,5 +1,5 @@
 import {authorize} from 'react-native-app-auth';
-import {config} from '../config/authConfig';
+import {config} from '../constants/authConfig';
 import {TokenData} from '../types/auth';
 import {TokenManager} from './TokenManager';
 
