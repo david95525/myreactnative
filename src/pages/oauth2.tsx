@@ -3,10 +3,10 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
 import {Button, Linking, StyleSheet, Text, View} from 'react-native';
-import {AuthService} from '../services/authService';
-import {MemberService} from '../services/memberService';
+import {AuthService} from '../services/authService.ts';
+import {MemberService} from '../services/memberService.ts';
 import {RootDrawerParamList, WebViewStackParamList} from '../types/index.ts';
-import {MemberData} from '../types/member';
+import {MemberData} from '../types/member.ts';
 type OAuth2ScreenProps = CompositeScreenProps<
   DrawerScreenProps<RootDrawerParamList, 'OAuth2Login'>,
   StackScreenProps<WebViewStackParamList, 'WebViewMain'>
