@@ -1,4 +1,10 @@
-import {BluetoothPage, ChartsDisplay, Home, ScanPage} from '@pages/index.tsx';
+import {
+  BluetoothPage,
+  ChartsDisplay,
+  Home,
+  PdfReport,
+  ScanPage,
+} from '@pages/index.tsx';
 import type {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -24,6 +30,9 @@ export function getTabScreenOptions(
         case 'ScanPage':
           iconName = 'qrcode-scan';
           break;
+        case 'PdfReport':
+          iconName = 'file-pdf-box';
+          break;
         default:
           iconName = 'circle';
       }
@@ -41,6 +50,7 @@ export function CustomBottomTabNavigator() {
       <Tab.Screen name="ChartsDisplay" component={ChartsDisplay} />
       <Tab.Screen name="BluetoothPage" component={BluetoothPage} />
       <Tab.Screen name="ScanPage" component={ScanPage} />
+      <Tab.Screen name="PdfReport" component={PdfReport} />
     </Tab.Navigator>
   );
 }
