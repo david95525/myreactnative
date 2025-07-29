@@ -1,5 +1,12 @@
 // ReportScreen.tsx
 import {ChartWebView} from '@components/ChartWebView';
+import {readings} from '@constants/bpmData.ts';
+import {
+  calculateAvg,
+  calculateEveningAvg,
+  calculateMorningAvg,
+  getDateRange,
+} from '@utils/index.ts';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import React, {useState} from 'react';
@@ -12,24 +19,20 @@ import {
   View,
 } from 'react-native';
 import RNFS from 'react-native-fs';
-import {logobase64} from '../constants/logobase64';
+import {logobase64} from '../assets/logobase64.ts';
 pdfMake.vfs = pdfFonts.vfs;
 
 const mockData = {
   name: 'ML Test',
-  age: 45,
-  dateRange: '2025/04/29 - 2025/07/28',
-  avg: {sys: 123, dia: 94},
-  morning: {sys: 122, dia: 78},
-  evening: {sys: 0, dia: 0},
-  readings: [
-    {date: '2025/07/15', time: '15:13', sys: 124, dia: 75, pulse: 82},
-    {date: '2025/07/11', time: '11:09', sys: 120, dia: 80, pulse: 72},
-    {date: '2025/06/06', time: '14:21', sys: 122, dia: 82, pulse: 62},
-  ],
+  age: 30,
+  dateRange: getDateRange(readings),
+  avg: calculateAvg(readings),
+  morning: calculateMorningAvg(readings),
+  evening: calculateEveningAvg(readings),
+  readings: readings,
 };
 
-export const PdfReport = () => {
+export const PdfPage = () => {
   const [chartBase64, setChartBase64] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const generatePdf = async () => {

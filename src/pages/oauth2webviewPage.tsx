@@ -1,6 +1,7 @@
 // WebViewScreen.tsx
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {StackScreenProps} from '@react-navigation/stack';
+import {RootDrawerParamList, WebViewStackParamList} from '@types';
 import React, {useRef, useState} from 'react';
 import {
   Alert,
@@ -14,7 +15,6 @@ import {
 } from 'react-native';
 import {WebView, WebViewMessageEvent} from 'react-native-webview';
 import type {OnShouldStartLoadWithRequest} from 'react-native-webview/lib/WebViewTypes';
-import {RootDrawerParamList, WebViewStackParamList} from '../types/index.ts';
 type WebViewScreenProps = StackScreenProps<
   WebViewStackParamList,
   'WebViewMain'
@@ -84,7 +84,7 @@ export function WebViewScreen({route, navigation}: WebViewScreenProps) {
         navigation.getParent<DrawerNavigationProp<RootDrawerParamList>>();
       if (!parentNav) return false;
       const params = toQueryObj(url);
-      parentNav.navigate('OAuth2Login', params);
+      parentNav.navigate('OAuth2Page', params);
       return false;
     } catch (err) {
       console.error('URL 解析錯誤:', err);

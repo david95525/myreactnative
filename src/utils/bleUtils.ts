@@ -1,4 +1,4 @@
-//import {TOTAL_HEADER_SKIP} from "../types/index.ts";
+//import {TOTAL_HEADER_SKIP} from "@types";
 export function pad(n: number): string {
     return n.toString().padStart(2, '0');
 }

@@ -1,8 +1,8 @@
+import {BleConstants} from "@constants/bleConstants.ts";
+import {BpMode, DRecord, GSensorStatus} from "@types";
+import {eventBus, isValidPacket, pad, parseBpData} from '@utils/index.ts';
 import {Buffer} from 'buffer';
 import {BleManager, Device, Subscription} from 'react-native-ble-plx';
-import {BleConstants} from "../constants/bleConstants.ts";
-import {BpMode, DRecord, GSensorStatus} from "../types/index.ts";
-import {eventBus, isValidPacket, pad, parseBpData} from '../utils/index.ts';
 export class BpmBleService {
     private manager: BleManager;
     private device: Device | null = null;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
-//import {ChartKit} from '../components/ChartKit';
-import {ChartVictoryNative} from '../components/ChartVictoryNative';
+//import {ChartKit} from '@components/ChartKit';
+import {ChartVictoryNative} from '@components/ChartVictoryNative';
 
-export const ChartsDisplay = () => {
+export const ChartsDisplayPage = () => {
   return (
     <View>
       {/* <ChartKit /> */}

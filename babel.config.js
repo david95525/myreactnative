@@ -7,8 +7,12 @@ module.exports = {
         root: ['./src'],
         alias: {
           '@components': './src/components',
-          '@services': './src/services',
           '@pages': './src/pages',
+          '@services': './src/services',
+          '@utils': './src/utils',
+          '@constants': './src/constants',
+          '@types/*': './src/types',
+          "@types": ["types/index"]
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },

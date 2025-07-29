@@ -1,6 +1,6 @@
 import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
 
 interface Datatype {
@@ -44,30 +44,30 @@ export const ScanPage: React.FC = () => {
   }, [hasPermission, isFocused]);
 
   const uploadPhoto = async (path: string) => {
-    const data = new FormData();
-    data.append('file', {
-      uri: 'file://' + path,
-      type: 'image/jpeg',
-    });
-    try {
-      let res = await fetch('', {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      if (res.ok) {
-        let values: Datatype = await res.json();
-        setSys(values.blob.merged_numbers[0]);
-      }
-      let result = await res.json();
-      Alert.alert(result);
-    } catch (e) {
-      console.warn('Upload failed', e);
-      Alert.alert('Upload failed' + e);
-    }
+    // const data = new FormData();
+    // data.append('file', {
+    //   uri: 'file://' + path,
+    //   type: 'image/jpeg',
+    //   name: 'photo.jpg',
+    // });
+    // try {
+    //   let res = await fetch('', {
+    //     method: 'POST',
+    //     body: data,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
+    //   if (res.ok) {
+    //     let values: Datatype = await res.json();
+    //     setSys(values.blob.merged_numbers[0]);
+    //   }
+    //   let result = await res.json();
+    //   Alert.alert(result);
+    // } catch (e) {
+    //   console.warn('Upload failed', e);
+    //   Alert.alert('Upload failed' + e);
+    // }
   };
 
   if (device == null || !hasPermission) {

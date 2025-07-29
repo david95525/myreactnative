@@ -53,7 +53,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-export function Home() {
+export function HomePage() {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {

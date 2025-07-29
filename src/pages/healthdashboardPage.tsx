@@ -1,3 +1,4 @@
+import PainLevelSelector from '@components/painlevelselector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState} from 'react';
 import {
@@ -10,7 +11,6 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import PainLevelSelector from '../components/painlevelselector';
 
 export const HealthDashboard = () => {
   const {width, height} = useWindowDimensions();

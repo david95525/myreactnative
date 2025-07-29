@@ -1,9 +1,9 @@
 import {
-  BluetoothPage,
-  ChartsDisplay,
-  Home,
-  PdfReport,
-  ScanPage,
+  BlePage,
+  ChartsDisplayPage,
+  ECGPage,
+  HomePage,
+  PdfPage,
 } from '@pages/index.tsx';
 import type {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -24,14 +24,14 @@ export function getTabScreenOptions(
         case 'ChartsDisplay':
           iconName = 'chart-areaspline';
           break;
-        case 'BluetoothPage':
+        case 'Ble':
           iconName = 'bluetooth';
           break;
-        case 'ScanPage':
-          iconName = 'qrcode-scan';
-          break;
-        case 'PdfReport':
+        case 'Pdf':
           iconName = 'file-pdf-box';
+          break;
+        case 'ECG':
+          iconName = 'heart-pulse';
           break;
         default:
           iconName = 'circle';
@@ -46,11 +46,11 @@ export function getTabScreenOptions(
 export function CustomBottomTabNavigator() {
   return (
     <Tab.Navigator screenOptions={({route}) => getTabScreenOptions(route.name)}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="ChartsDisplay" component={ChartsDisplay} />
-      <Tab.Screen name="BluetoothPage" component={BluetoothPage} />
-      <Tab.Screen name="ScanPage" component={ScanPage} />
-      <Tab.Screen name="PdfReport" component={PdfReport} />
+      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="ChartsDisplay" component={ChartsDisplayPage} />
+      <Tab.Screen name="Ble" component={BlePage} />
+      <Tab.Screen name="Pdf" component={PdfPage} />
+      <Tab.Screen name="ECG" component={ECGPage} />
     </Tab.Navigator>
   );
 }

@@ -1,4 +1,4 @@
-import {config} from '../constants/authConfig';
+import {config} from '@constants/authConfig';
 import {AuthService} from './AuthService';
 
 type WebViewSource = {

@@ -1,5 +1,5 @@
-import {api_url} from '../constants/authConfig';
-import {MemberData} from '../types/member';
+import {api_url} from '@constants/authConfig';
+import {MemberData} from '@types';
 import {ApiService} from './apiService';
 export const MemberService = {
     getBaseMemberData: async (

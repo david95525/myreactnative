@@ -1,6 +1,6 @@
+import {TokenData} from '@types';
 import {AuthConfiguration, refresh} from 'react-native-app-auth';
 import * as Keychain from 'react-native-keychain';
-import {TokenData} from '../types/auth';
 
 const STORAGE_KEY = 'auth_token';
 

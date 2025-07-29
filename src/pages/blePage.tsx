@@ -1,3 +1,7 @@
+import {BleConstants} from '@constants/bleConstants.ts';
+import {BpmBleService} from '@services/bpmBleService.ts';
+import {DRecord} from '@types';
+import {eventBus} from '@utils/eventBus';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Button,
@@ -10,11 +14,7 @@ import {
   View,
 } from 'react-native';
 import {BleManager, Device} from 'react-native-ble-plx';
-import {BleConstants} from '../constants/bleConstants.ts';
-import {BpmBleService} from '../services/BpmBleService';
-import {DRecord} from '../types/index.ts';
-import {eventBus} from '../utils/eventBus';
-export const BluetoothPage = () => {
+export const BlePage = () => {
   const bleManagerRef = useRef(new BleManager());
   const [devices, setDevices] = useState<Device[]>([]);
   const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);

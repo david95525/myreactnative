@@ -1,20 +1,19 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {AuthService} from '@services/authService.ts';
+import {MemberService} from '@services/memberService.ts';
+import {MemberData, RootDrawerParamList, WebViewStackParamList} from '@types';
 import React, {useEffect, useState} from 'react';
 import {Button, Linking, StyleSheet, Text, View} from 'react-native';
-import {AuthService} from '../services/authService.ts';
-import {MemberService} from '../services/memberService.ts';
-import {RootDrawerParamList, WebViewStackParamList} from '../types/index.ts';
-import {MemberData} from '../types/member.ts';
 type OAuth2ScreenProps = CompositeScreenProps<
-  DrawerScreenProps<RootDrawerParamList, 'OAuth2Login'>,
+  DrawerScreenProps<RootDrawerParamList, 'OAuth2Page'>,
   StackScreenProps<WebViewStackParamList, 'WebViewMain'>
 >;
 const url =
   'https://phrdev.microlifecloud.com/scanbp?redirect_uri=myreactnative://oauth2redirect';
 
-export const OAuth2Login = ({navigation, route}: OAuth2ScreenProps) => {
+export const OAuth2Page = ({navigation, route}: OAuth2ScreenProps) => {
   const {sys, dia, pul} = route.params ?? {};
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenExpiry, setAccessTokenExpiry] = useState<string | null>(

@@ -6,6 +6,7 @@ export type WebViewStackParamList = {
 export type RootDrawerParamList = {
     HealthDashboard: undefined;
     TabNavigator: undefined;
-    OAuth2Login: OAuth2Params | undefined;
+    OAuth2Page: OAuth2Params | undefined;
+    ScanPage: undefined;
     WebViewStack: NavigatorScreenParams<WebViewStackParamList>;
 };

@@ -1,6 +1,6 @@
+import {config} from '@constants/authConfig';
+import {TokenData} from '@types';
 import {authorize} from 'react-native-app-auth';
-import {config} from '../constants/authConfig';
-import {TokenData} from '../types/auth';
 import {TokenManager} from './TokenManager';
 
 const tokenManager = new TokenManager(config);
