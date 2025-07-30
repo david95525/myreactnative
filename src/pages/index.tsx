@@ -1,6 +1,6 @@
 export * from './blePage.tsx';
 export * from './chartsPage.tsx';
-export * from './ECGPage.tsx';
+export * from './combinedChartPage.tsx';
 export * from './healthdashboardPage.tsx';
 export * from './homePage.tsx';
 export * from './oauth2Page.tsx';

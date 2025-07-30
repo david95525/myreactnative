@@ -1,7 +1,7 @@
 import {
   BlePage,
   ChartsDisplayPage,
-  ECGPage,
+  CombinedChartPage,
   HomePage,
   PdfPage,
 } from '@pages/index.tsx';
@@ -30,7 +30,7 @@ export function getTabScreenOptions(
         case 'Pdf':
           iconName = 'file-pdf-box';
           break;
-        case 'ECG':
+        case 'CombinedChart':
           iconName = 'heart-pulse';
           break;
         default:
@@ -50,7 +50,7 @@ export function CustomBottomTabNavigator() {
       <Tab.Screen name="ChartsDisplay" component={ChartsDisplayPage} />
       <Tab.Screen name="Ble" component={BlePage} />
       <Tab.Screen name="Pdf" component={PdfPage} />
-      <Tab.Screen name="ECG" component={ECGPage} />
+      <Tab.Screen name="CombinedChart" component={CombinedChartPage} />
     </Tab.Navigator>
   );
 }
