@@ -3,6 +3,7 @@ import {
   ChartsDisplayPage,
   CombinedChartPage,
   HomePage,
+  OCRLivePage,
   PdfPage,
 } from '@pages/index.tsx';
 import type {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
@@ -33,6 +34,9 @@ export function getTabScreenOptions(
         case 'CombinedChart':
           iconName = 'heart-pulse';
           break;
+        case 'OCRLive':
+          iconName = 'text-recognition';
+          break;
         default:
           iconName = 'circle';
       }
@@ -51,6 +55,7 @@ export function CustomBottomTabNavigator() {
       <Tab.Screen name="Ble" component={BlePage} />
       <Tab.Screen name="Pdf" component={PdfPage} />
       <Tab.Screen name="CombinedChart" component={CombinedChartPage} />
+      <Tab.Screen name="OCRLive" component={OCRLivePage} />
     </Tab.Navigator>
   );
 }

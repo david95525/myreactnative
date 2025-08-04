@@ -36,7 +36,7 @@ const ECGChart: React.FC = () => {
         if (next.length > MAX_POINTS) next.shift();
         return next;
       });
-    }, 50); // ECG 更新速度快
+    }, 50); // 50ms
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
@@ -80,7 +80,7 @@ const BpmChart: React.FC = () => {
         if (next.length > MAX_POINTS) next.shift();
         return next;
       });
-    }, 1000); // 每秒更新一筆
+    }, 200); // 200ms更新一筆
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);

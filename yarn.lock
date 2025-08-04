@@ -3168,6 +3168,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-ml-kit/text-recognition@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "@react-native-ml-kit/text-recognition@npm:1.5.2"
+  peerDependencies:
+    react: ">=16.8.1"
+    react-native: ">=0.60.0-rc.0 <1.0.x"
+  checksum: 10c0/65f929af2fd9a69fff0ab7f8948eae39e73912c3d2d3dfc4c2e9a689713d2ac6427d115621303ce461391f4ea22a696cb71c8f71e1bfaa2cb92c9ea10621be3a
+  languageName: node
+  linkType: hard
+
 "@react-native-picker/picker@npm:^2.11.1":
   version: 2.11.1
   resolution: "@react-native-picker/picker@npm:2.11.1"
@@ -9034,6 +9044,7 @@ __metadata:
     "@react-native-community/cli": "npm:18.0.0"
     "@react-native-community/cli-platform-android": "npm:18.0.0"
     "@react-native-community/cli-platform-ios": "npm:18.0.0"
+    "@react-native-ml-kit/text-recognition": "npm:^1.5.2"
     "@react-native-picker/picker": "npm:^2.11.1"
     "@react-native/babel-preset": "npm:0.80.1"
     "@react-native/eslint-config": "npm:0.80.1"
@@ -9077,6 +9088,7 @@ __metadata:
     react-native-vector-icons: "npm:^10.2.0"
     react-native-vision-camera: "npm:^4.7.0"
     react-native-webview: "npm:^13.15.0"
+    react-native-worklets-core: "npm:^1.6.0"
     react-test-renderer: "npm:19.1.0"
     typescript: "npm:5.8.3"
     victory-native: "npm:^41.17.4"
@@ -10168,6 +10180,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-worklets-core@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "react-native-worklets-core@npm:1.6.0"
+  dependencies:
+    string-hash-64: "npm:^1.0.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/f2eee18d8cf4598a2454f7c98e90cfa7fe685d13ab857bf25ffdadfc7a8ae8b24908f819e7b3e0f772eade69c420d0a213897ffed2c9e44cee70421bae20fc18
+  languageName: node
+  linkType: hard
+
 "react-native@npm:^0.80.1":
   version: 0.80.1
   resolution: "react-native@npm:0.80.1"
@@ -10963,6 +10987,13 @@ __metadata:
   version: 2.0.0
   resolution: "strict-uri-encode@npm:2.0.0"
   checksum: 10c0/010cbc78da0e2cf833b0f5dc769e21ae74cdc5d5f5bd555f14a4a4876c8ad2c85ab8b5bdf9a722dc71a11dcd3184085e1c3c0bd50ec6bb85fffc0f28cf82597d
+  languageName: node
+  linkType: hard
+
+"string-hash-64@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "string-hash-64@npm:1.0.3"
+  checksum: 10c0/ac175f71b383af1487ab16b4cc1b42b5302bea08bdf1cc1ea04bacb293fb9b35afc6c58260e1fc728627e7265519da01976822a188d493d7e7625b9628173ea3
   languageName: node
   linkType: hard
 

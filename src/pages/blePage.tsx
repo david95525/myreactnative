@@ -30,7 +30,7 @@ export const BlePage = () => {
   const seenDeviceIdsRef = useRef<Set<string>>(new Set());
   useEffect(() => {
     bpmServiceRef.current = new BpmBleService(bleManagerRef.current);
-    requestPermissions();
+
     const onError = (msg: string) => setErrorMsg(msg);
     eventBus.on('bleError', onError);
     const onDebug = (msg: string) => setDebugMsg(msg);
@@ -64,6 +64,7 @@ export const BlePage = () => {
   };
 
   const scanDevices = (targetDeviceId?: string) => {
+    requestPermissions();
     if (isScanning) return;
 
     setIsScanning(true);
