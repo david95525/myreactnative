@@ -5,6 +5,6 @@ export * from './healthdashboardPage.tsx';
 export * from './homePage.tsx';
 export * from './oauth2Page.tsx';
 export * from './oauth2webviewPage.tsx';
-export * from './OCRLivePage.tsx';
 export * from './pdfPage.tsx';
+// export * from './reactNativeFastTFLitePage.tsx';
 export * from './scanPage.tsx';

@@ -3168,16 +3168,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-ml-kit/text-recognition@npm:^1.5.2":
-  version: 1.5.2
-  resolution: "@react-native-ml-kit/text-recognition@npm:1.5.2"
-  peerDependencies:
-    react: ">=16.8.1"
-    react-native: ">=0.60.0-rc.0 <1.0.x"
-  checksum: 10c0/65f929af2fd9a69fff0ab7f8948eae39e73912c3d2d3dfc4c2e9a689713d2ac6427d115621303ce461391f4ea22a696cb71c8f71e1bfaa2cb92c9ea10621be3a
-  languageName: node
-  linkType: hard
-
 "@react-native-picker/picker@npm:^2.11.1":
   version: 2.11.1
   resolution: "@react-native-picker/picker@npm:2.11.1"
@@ -3272,6 +3262,21 @@ __metadata:
   peerDependencies:
     "@babel/core": "*"
   checksum: 10c0/9bb98e35b7c423c6fd0cc5633011aa5648df54c70425f1128412ed1fb4221d98866dd157a4d391192a408f1733e514c80e094b2d435667ac1c3269d28508e83f
+  languageName: node
+  linkType: hard
+
+"@react-native/codegen@npm:^0.80.2":
+  version: 0.80.2
+  resolution: "@react-native/codegen@npm:0.80.2"
+  dependencies:
+    glob: "npm:^7.1.1"
+    hermes-parser: "npm:0.28.1"
+    invariant: "npm:^2.2.4"
+    nullthrows: "npm:^1.1.1"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: 10c0/981e02105ea871643bb5f0aa0f6db2d1851a3b0cc831cf7a8e6779ceeaadeaaaabc385f93726e353d1c242c0122f9e432678a5d83d776ebba8749551f5762d60
   languageName: node
   linkType: hard
 
@@ -3538,9 +3543,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@shopify/react-native-skia@npm:2.1.1"
+"@shopify/react-native-skia@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "@shopify/react-native-skia@npm:2.2.3"
   dependencies:
     canvaskit-wasm: "npm:0.40.0"
     react-reconciler: "npm:0.31.0"
@@ -3555,7 +3560,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 10c0/4ddcd8b5ca6e6051ce79aa6623b4c65cdf4ce4595d308f1354a5e2f229eead8b8ad56d8d8a2321e2cc533b055ea8f2abf5b7c9b79f06ea033c7a7564f456c464
+  checksum: 10c0/f07066f48c3a5c12e84415347ff6995730105d5fc44367808580d2fabaa8ae68f69d580ffcc0870e6d61ee0f4ee20be5b8de908e1a9807ec11f9c3667731594b
   languageName: node
   linkType: hard
 
@@ -9044,9 +9049,9 @@ __metadata:
     "@react-native-community/cli": "npm:18.0.0"
     "@react-native-community/cli-platform-android": "npm:18.0.0"
     "@react-native-community/cli-platform-ios": "npm:18.0.0"
-    "@react-native-ml-kit/text-recognition": "npm:^1.5.2"
     "@react-native-picker/picker": "npm:^2.11.1"
     "@react-native/babel-preset": "npm:0.80.1"
+    "@react-native/codegen": "npm:^0.80.2"
     "@react-native/eslint-config": "npm:0.80.1"
     "@react-native/metro-config": "npm:0.80.1"
     "@react-native/typescript-config": "npm:0.80.1"
@@ -9054,7 +9059,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.5.2"
     "@react-navigation/native": "npm:^7.1.14"
     "@react-navigation/stack": "npm:^7.4.2"
-    "@shopify/react-native-skia": "npm:^2.1.1"
+    "@shopify/react-native-skia": "npm:^2.2.3"
     "@types/jest": "npm:^30.0.0"
     "@types/pdfmake": "npm:^0"
     "@types/react": "npm:^19.1.8"
@@ -9075,7 +9080,7 @@ __metadata:
     react-native-chart-kit: "npm:^6.12.0"
     react-native-dotenv: "npm:^3.4.11"
     react-native-fs: "npm:^2.20.0"
-    react-native-gesture-handler: "npm:^2.27.1"
+    react-native-gesture-handler: "npm:^2.28.0"
     react-native-html-to-pdf: "npm:^0.12.0"
     react-native-keychain: "npm:^10.0.0"
     react-native-paper: "npm:^5.14.5"
@@ -9086,9 +9091,8 @@ __metadata:
     react-native-screens: "npm:^4.11.1"
     react-native-svg: "npm:^15.12.0"
     react-native-vector-icons: "npm:^10.2.0"
-    react-native-vision-camera: "npm:^4.7.0"
+    react-native-vision-camera: "npm:^4.7.1"
     react-native-webview: "npm:^13.15.0"
-    react-native-worklets-core: "npm:^1.6.0"
     react-test-renderer: "npm:19.1.0"
     typescript: "npm:5.8.3"
     victory-native: "npm:^41.17.4"
@@ -9981,9 +9985,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.27.1":
-  version: 2.27.2
-  resolution: "react-native-gesture-handler@npm:2.27.2"
+"react-native-gesture-handler@npm:^2.28.0":
+  version: 2.28.0
+  resolution: "react-native-gesture-handler@npm:2.28.0"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -9991,7 +9995,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/f671664b29e738b99aa25f4a1acd3c069af506fa1945f03f297158dc655896d441c1be113e9fb5f6cf4eb7eda58fd0471e0dab3e3c498dabd294f2652a0b9575
+  checksum: 10c0/4240c8eedca69eb36b5d3e375b71867251cf8b87a755ba7066b3f73cfdbc80574042dbd4ff821041fd1539c4cd90dbf7ee34586f5a0ea6cc38052375b3169f2e
   languageName: node
   linkType: hard
 
@@ -10147,9 +10151,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-vision-camera@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "react-native-vision-camera@npm:4.7.0"
+"react-native-vision-camera@npm:^4.7.1":
+  version: 4.7.1
+  resolution: "react-native-vision-camera@npm:4.7.1"
   peerDependencies:
     "@shopify/react-native-skia": "*"
     react: "*"
@@ -10163,7 +10167,7 @@ __metadata:
       optional: true
     react-native-worklets-core:
       optional: true
-  checksum: 10c0/cfc9694fe1f2b729581913cf8c1eee8def28c905d14ff1cc1452e090537ecacb436e023bf825e81d6a99af953eb4a7ed3ac7b5000590179882cfb2cbc71e1493
+  checksum: 10c0/6317596da5b0e361b7d49c5d739c1ce2e6f93eaa10973aee2d46ad3a4fbba68299c61c45aa2d5895bdbaee881fb0fa70005285068b8bb2e96bd99a9c441df8e8
   languageName: node
   linkType: hard
 
@@ -10177,18 +10181,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/29b8ad4c1c8623c62e868893e829d20ef1ab51b38f44d0f422e0c19df9d8747ae25d1fcceec4e6d78106f263dce66b7984eeb12c0e5046c7c898b81673b0b6d6
-  languageName: node
-  linkType: hard
-
-"react-native-worklets-core@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "react-native-worklets-core@npm:1.6.0"
-  dependencies:
-    string-hash-64: "npm:^1.0.3"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/f2eee18d8cf4598a2454f7c98e90cfa7fe685d13ab857bf25ffdadfc7a8ae8b24908f819e7b3e0f772eade69c420d0a213897ffed2c9e44cee70421bae20fc18
   languageName: node
   linkType: hard
 
@@ -10987,13 +10979,6 @@ __metadata:
   version: 2.0.0
   resolution: "strict-uri-encode@npm:2.0.0"
   checksum: 10c0/010cbc78da0e2cf833b0f5dc769e21ae74cdc5d5f5bd555f14a4a4876c8ad2c85ab8b5bdf9a722dc71a11dcd3184085e1c3c0bd50ec6bb85fffc0f28cf82597d
-  languageName: node
-  linkType: hard
-
-"string-hash-64@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "string-hash-64@npm:1.0.3"
-  checksum: 10c0/ac175f71b383af1487ab16b4cc1b42b5302bea08bdf1cc1ea04bacb293fb9b35afc6c58260e1fc728627e7265519da01976822a188d493d7e7625b9628173ea3
   languageName: node
   linkType: hard
 
